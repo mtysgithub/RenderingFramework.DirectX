@@ -184,7 +184,7 @@ namespace DirectDrawWrapper
 		{
 			VideoMemory = ( unsigned int * ) LockedSurface.lpSurface;
 
-			Stride = LockedSurface.lPitch >> PixelSize;
+			Stride = LockedSurface.lPitch / PixelSize;
 
 			return true;
 		}
