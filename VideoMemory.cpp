@@ -2,13 +2,13 @@
 
 namespace DirectDrawWrapper
 {
-	VideoMemory::VideoMemory( IntPtr hWnd )
+	VideoMemory::VideoMemory( HWND hWnd )
 	{
 		pDDW = new DirectDrawWrapper();
 
 		pDDW->Initialize
 		(
-			static_cast<HWND>( hWnd.ToPointer() )
+			hWnd
 		);
 	}
 
@@ -40,12 +40,11 @@ namespace DirectDrawWrapper
 	{
 		if( pDDW->Lock( clearFrame ) )
 		{
-			VideoMemoryPtr = ( IntPtr )pDDW->VideoMemory;
+			VideoMemoryPtr = pDDW->VideoMemory;
 			Stride = pDDW->Stride;
 
 			return true;
 		}
-
 		return false;
 	}
 
@@ -60,12 +59,6 @@ namespace DirectDrawWrapper
 	}
 
 	VideoMemory::~VideoMemory()
-	{
-		delete pDDW;
-		pDDW = 0;
-	}
-
-	VideoMemory::!VideoMemory()
 	{
 		delete pDDW;
 		pDDW = 0;

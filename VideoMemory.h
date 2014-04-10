@@ -1,40 +1,32 @@
 #pragma once
-
+#include <Windows.h>
 #include "DirectDrawUtility.h"
-
-using namespace System;
 
 namespace DirectDrawWrapper
 {
-	#pragma managed
-
-	public enum PixelSize { Real = 1, High = 2, True = 4 };
-
-	public ref class VideoMemory
+	enum PixelSize { Real = 1, High = 2, True = 4 };
+	class VideoMemory
 	{
-		public:
+	public:
+		VideoMemory( HWND );
 
-			VideoMemory( IntPtr );
+		void CreateDevice();
+		void ResetDevice();
+		void Release();
 
-			void CreateDevice();
-			void ResetDevice();
-			void Release();
+		void SetBackgroundColor( unsigned int );
+		void SetColorFormat( PixelSize );
 
-			void SetBackgroundColor( unsigned int );
-			void SetColorFormat( PixelSize );
+		bool ReadyFrame( bool );
+		void RenderFrame();
 
-			bool ReadyFrame( bool );
-			void RenderFrame();
+		void *VideoMemoryPtr;
+		int Width, Height, Stride;
 
-			IntPtr VideoMemoryPtr;
-			int Width, Height, Stride;
+	protected:
+		~VideoMemory();
 
-		protected:
-
-			~VideoMemory();
-			!VideoMemory();
-
-		private:
-			DirectDrawWrapper * pDDW;
+	private:
+		DirectDrawWrapper * pDDW;
 	};
 }

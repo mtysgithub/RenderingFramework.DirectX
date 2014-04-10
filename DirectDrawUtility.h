@@ -31,7 +31,7 @@ namespace DirectDrawWrapper
 			int Width, Height, Stride;
 			unsigned int BackgroundColor;
 
-			void * VideoMemory;
+			void *VideoMemory;
 
 			char PixelSize;
 
